@@ -12,10 +12,11 @@ RUN useradd -ms /bin/bash python
 
 USER python
 
-WORKDIR /home/python/app
+WORKDIR /home/python/app/
 
 ENV PYTHONPATH=${PYTHONPATH}/home/app/src
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
 
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" \
     -t https://github.com/romkatv/powerlevel10k \
