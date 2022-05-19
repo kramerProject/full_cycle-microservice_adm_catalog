@@ -19,7 +19,7 @@ WORKDIR /home/python/app/
 ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.10
 ENV PYTHONPATH=${PYTHONPATH}/home/python/app/src
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-ENTRYPOINT PATH $PATH:${MY_PYTHON_PACKAGES}/bin
+ENV PATH $PATH:${MY_PYTHON_PACKAGES}/bin
 
 
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" \
@@ -31,6 +31,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -p https://github.com/zsh-users/zsh-completions \
     -a 'export TERM=xterm-256color'
 
-RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
+RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
+    echo 'HISTFILE=/home/python/zsh/ .zsh_history' >> ~/.zshrc
 
 CMD [ "tail", "-f", "/dev/null" ]
