@@ -10,12 +10,16 @@ RUN apt update && apt install -y --no-install-recommends \
 
 RUN useradd -ms /bin/bash python
 
+RUN pip install pdm
+
 USER python
 
 WORKDIR /home/python/app/
 
-ENV PYTHONPATH=${PYTHONPATH}/home/app/src
+ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.10
+ENV PYTHONPATH=${PYTHONPATH}/home/python/app/src
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENTRYPOINT PATH $PATH:${MY_PYTHON_PACKAGES}/bin
 
 
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" \
