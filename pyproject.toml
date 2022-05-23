@@ -15,6 +15,7 @@ license = {text = "MIT"}
 dev = [
     "autopep8>=1.6.0",
     "pylint>=2.13.9",
+    "pytest>=7.1.2",
 ]
 
 [build-system]
